@@ -45,7 +45,6 @@
                         for(var a in matches)
                         {
                             var txt = matches[a].replace('@media','').replace('{','');
-                            var found = false;
 
                             if (mqs[txt])
                                 continue;
