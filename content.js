@@ -51,9 +51,11 @@
 
                             mqs[txt] = txt;
                             var mql = window.matchMedia(txt);
-                            console.log("Found: " + txt);
-                            mql.addListener(mediaChangeHandler);
-                            mediaChangeHandler(mql);
+                            if (mql.media != "print") {
+                                console.log("Found: " + mql.media);
+                                mql.addListener(mediaChangeHandler);
+                                mediaChangeHandler(mql);
+                            }
                         }
                     }
                 }
@@ -76,15 +78,17 @@ var _mqDebugDiv = document.createElement('div');
 _mqDebugDiv.id = 'mqEventsCondition';
 
 // This is nasty, but hey...
-_mqDebugDiv.setAttribute('style', 'font-size:10px;font-family:monospace;text-transform:uppercase;position:fixed;bottom:20px;left:20px;background-color:black;color:white;border:1px solid white;padding:3px 8px 5px 8px;z-index:9999;');
+_mqDebugDiv.setAttribute('style', 'transition: all 1s ease;font-size:11px;font-family:monospace;text-transform:uppercase;position:fixed;bottom:10px;left:10px;color:white;padding:5px;z-index:9999;');
 
 var _mqDebugMsg = document.getElementById('mqEventsCondition');
+var _mqDebugTimer;
 
 var handleMediaChange = function (mql) {
     if (mql.matches) {
+        clearTimeout(_mqDebugTimer)
         _mqDebugDiv.innerHTML = 'MQ: ' + mql.media;
-    } else {
-        _mqDebugDiv.innerHTML = 'MQ: ' + mql.media;
+        _mqDebugDiv.style.backgroundColor = "red";
+        _mqDebugTimer = setTimeout(function() { _mqDebugDiv.style.backgroundColor = "rgba(0,0,0,.6)"; }, 400);
     }
 };
 

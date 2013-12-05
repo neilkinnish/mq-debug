@@ -1,5 +1,5 @@
 {
-  "name": "MQ Events",
+  "name": "MQ Debug",
   "description": "Displays media query events for the current page",
   "version": "1.0",
   "permissions": [
@@ -16,7 +16,7 @@
     "persistent": false
   },
   "browser_action": {
-      "default_title": "MQ Events",
+      "default_title": "MQ Debug",
       "default_icon": "icon32.png"
   },
   "manifest_version": 2
