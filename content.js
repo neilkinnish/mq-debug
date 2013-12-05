@@ -77,9 +77,6 @@
 var _mqDebugDiv = document.createElement('div');
 _mqDebugDiv.id = 'mqEventsCondition';
 
-// This is nasty, but hey...
-_mqDebugDiv.setAttribute('style', 'margin-right:10px;transition: all 1s ease;font-size:11px;font-family:monospace;text-transform:uppercase;position:fixed;bottom:10px;left:10px;color:white;padding:5px;z-index:9999;');
-
 var _mqDebugMsg = document.getElementById('mqEventsCondition');
 var _mqDebugTimer;
 
@@ -87,8 +84,10 @@ var handleMediaChange = function (mql) {
     if (mql.matches) {
         clearTimeout(_mqDebugTimer)
         _mqDebugDiv.innerHTML = 'MQ: ' + mql.media;
-        _mqDebugDiv.style.backgroundColor = "red";
-        _mqDebugTimer = setTimeout(function() { _mqDebugDiv.style.backgroundColor = "rgba(0,0,0,.6)"; }, 400);
+        // This is nasty, but hey...
+        _mqDebugDiv.setAttribute('style', 'font-weight:normal !important;margin-right:10px !important;transition: all 1s ease !important;border:none !important;background-image:none !important;background-color:red !important;font-size:11px !important;font-family:monospace !important;text-transform:uppercase !important;position:fixed !important;bottom:10px !important;left:10px !important;color:white !important;padding:5px !important;z-index:9999 !important;');
+        _mqDebugTimer = setTimeout(function() { _mqDebugDiv.setAttribute('style', 'font-weight:normal !important;margin-right:10px !important;transition: all 1s ease !important;border:none !important;background-image:none !important;background-color:black !important;font-size:11px !important;font-family:monospace !important;text-transform:uppercase !important;position:fixed !important;bottom:10px !important;left:10px !important;color:white !important;padding:5px !important;z-index:9999 !important;');
+ }, 400);
     }
 };
 
