@@ -78,7 +78,7 @@ var _mqDebugDiv = document.createElement('div');
 _mqDebugDiv.id = 'mqEventsCondition';
 
 // This is nasty, but hey...
-_mqDebugDiv.setAttribute('style', 'transition: all 1s ease;font-size:11px;font-family:monospace;text-transform:uppercase;position:fixed;bottom:10px;left:10px;color:white;padding:5px;z-index:9999;');
+_mqDebugDiv.setAttribute('style', 'margin-right:10px;transition: all 1s ease;font-size:11px;font-family:monospace;text-transform:uppercase;position:fixed;bottom:10px;left:10px;color:white;padding:5px;z-index:9999;');
 
 var _mqDebugMsg = document.getElementById('mqEventsCondition');
 var _mqDebugTimer;
