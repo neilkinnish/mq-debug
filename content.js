@@ -15,12 +15,12 @@
         if (_mqStyles != null)
             return _mqStyles.sheet;
 
-        // Listed for readability
+        // Listed like this for readability
         style.appendChild(document.createTextNode('#mqEventsCondition { font-family:monospace !important;font-size:11px !important;font-weight:normal !important;color:white !important;text-transform:uppercase !important; }'));
         style.appendChild(document.createTextNode('#mqEventsCondition { border:none !important;background-image:none !important;background-color:red !important; }'));
         style.appendChild(document.createTextNode('#mqEventsCondition { margin-right:10px !important;padding:5px !important; }'));
         style.appendChild(document.createTextNode('#mqEventsCondition { position:fixed !important;bottom:10px !important;left:10px !important;z-index:9999 !important; }'));
-        // Potential flash on change
+        // Potential flash on change - needs work
         // style.appendChild(document.createTextNode('#mqEventsCondition { transition: background-color .1s .3s linear !important; }'));
         // style.appendChild(document.createTextNode('#mqEventsCondition.flashback { background-color:black !important; }'));
         
@@ -101,7 +101,7 @@
             }
         }
 
-        if (!_mqDebugQueriesFound) {
+        if (!_mqDebugQueriesFound || (styleFiles === null || styleFiles.length === 0)) {
             console.error('No Media Queries could be found');
             _mqDebugDiv.innerHTML = 'No Media Queries found!';
         }
@@ -110,7 +110,6 @@
     window.mqEvents = mqEvents;
 
     var _mqDebugMsg = document.getElementById('mqEventsCondition');
-    var _mqStyles = document.getElementById('mqEventsStyles');
 
     if (_mqDebugMsg) {
         console.log('Removed MQ debug');
