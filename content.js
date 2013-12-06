@@ -19,7 +19,7 @@
         style.appendChild(document.createTextNode('#mqEventsCondition { font-family:monospace !important;font-size:11px !important;font-weight:normal !important;color:white !important;text-transform:uppercase !important; }'));
         style.appendChild(document.createTextNode('#mqEventsCondition { border:none !important;background-image:none !important;background-color:red !important; }'));
         style.appendChild(document.createTextNode('#mqEventsCondition { margin-right:10px !important;padding:5px !important; }'));
-        style.appendChild(document.createTextNode('#mqEventsCondition { position:fixed !important;bottom:10px !important;left:10px !important;z-index:9999 !important; }'));
+        style.appendChild(document.createTextNode('#mqEventsCondition { position:fixed !important;bottom:10px !important;left:10px !important;z-index:999999 !important; }'));
         // Potential flash on change - needs work
         // style.appendChild(document.createTextNode('#mqEventsCondition { transition: background-color .1s .3s linear !important; }'));
         // style.appendChild(document.createTextNode('#mqEventsCondition.flashback { background-color:black !important; }'));
