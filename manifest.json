@@ -1,7 +1,7 @@
 {
   "name": "MQ Debug",
   "description": "Displays media query events for the current page",
-  "version": "1.0",
+  "version": "1.1",
   "permissions": [
     "tabs", "http://*/*", "https://*/*"
   ],

@@ -2,6 +2,23 @@
 // Slightly updated and adjusted for a chrome extension and switched to ajax load to handle cross site scripting by Neil Kinnish @neiltak
 
 (function () {
+
+    var _mqDebugDiv = document.createElement('div'), _mqDebugTimer;
+    _mqDebugDiv.id = 'mqEventsCondition';
+    _mqDebugDiv.setAttribute('style', 'font-weight:normal !important;margin-right:10px !important;transition: all 1s ease !important;border:none !important;background-image:none !important;background-color:red !important;font-size:11px !important;font-family:monospace !important;text-transform:uppercase !important;position:fixed !important;bottom:10px !important;left:10px !important;color:white !important;padding:5px !important;z-index:9999 !important;');
+
+    var handleMediaChange = function (mql) {
+        _mqDebugDiv.setAttribute('style', 'font-weight:normal !important;margin-right:10px !important;transition: all 1s ease !important;border:none !important;background-image:none !important;background-color:red !important;font-size:11px !important;font-family:monospace !important;text-transform:uppercase !important;position:fixed !important;bottom:10px !important;left:10px !important;color:white !important;padding:5px !important;z-index:9999 !important;');
+
+        if (mql.matches) {
+            clearTimeout(_mqDebugTimer)
+            _mqDebugDiv.innerHTML = mql.media;
+            _mqDebugTimer = setTimeout(function() { 
+                _mqDebugDiv.setAttribute('style', 'font-weight:normal !important;margin-right:10px !important;transition: all 1s ease !important;border:none !important;background-image:none !important;background-color:black !important;font-size:11px !important;font-family:monospace !important;text-transform:uppercase !important;position:fixed !important;bottom:10px !important;left:10px !important;color:white !important;padding:5px !important;z-index:9999 !important;');
+            }, 400);
+        }
+    };
+
     var mqEvents = function (mediaChangeHandler) {
         var sheets = document.styleSheets;
         var _mqDebugQueriesFound = false;
@@ -51,6 +68,7 @@
 
                             mqs[txt] = txt;
                             var mql = window.matchMedia(txt);
+
                             if (mql.media != "print") {
                                 console.log("Found: " + mql.media);
                                 mql.addListener(mediaChangeHandler);
@@ -66,37 +84,21 @@
 
         if (!_mqDebugQueriesFound) {
             console.error("No Media Queries could be found");
-            var _mqDebugMsg = document.getElementById('mqEventsCondition');
-            _mqDebugMsg.innerHTML = 'No Media Queries found!';
+            _mqDebugDiv.innerHTML = 'No Media Queries found!';
         }
-    }
+    };
 
     window.mqEvents = mqEvents;
-}());
+    var _mqDebugMsg = document.getElementById('mqEventsCondition');
 
-var _mqDebugDiv = document.createElement('div');
-_mqDebugDiv.id = 'mqEventsCondition';
-
-var _mqDebugMsg = document.getElementById('mqEventsCondition');
-var _mqDebugTimer;
-
-var handleMediaChange = function (mql) {
-    if (mql.matches) {
-        clearTimeout(_mqDebugTimer)
-        _mqDebugDiv.innerHTML = 'MQ: ' + mql.media;
-        // This is nasty, but hey...
-        _mqDebugDiv.setAttribute('style', 'font-weight:normal !important;margin-right:10px !important;transition: all 1s ease !important;border:none !important;background-image:none !important;background-color:red !important;font-size:11px !important;font-family:monospace !important;text-transform:uppercase !important;position:fixed !important;bottom:10px !important;left:10px !important;color:white !important;padding:5px !important;z-index:9999 !important;');
-        _mqDebugTimer = setTimeout(function() { _mqDebugDiv.setAttribute('style', 'font-weight:normal !important;margin-right:10px !important;transition: all 1s ease !important;border:none !important;background-image:none !important;background-color:black !important;font-size:11px !important;font-family:monospace !important;text-transform:uppercase !important;position:fixed !important;bottom:10px !important;left:10px !important;color:white !important;padding:5px !important;z-index:9999 !important;');
- }, 400);
+    if (_mqDebugMsg) {
+        console.log("Removed MQ debug");
+        _mqDebugMsg.parentElement.removeChild(_mqDebugMsg);
+        window.mqEvents = null; // Better way?
+    } else {
+        document.getElementsByTagName('body')[0].appendChild(_mqDebugDiv);
+        console.log("Started MQ debug");
+        mqEvents(handleMediaChange);
     }
-};
 
-if (_mqDebugMsg) {
-    console.log("Removed MQ debug");
-    _mqDebugMsg.parentElement.removeChild(_mqDebugMsg);
-    window.mqEvents = null; // Better way?
-} else {
-    document.getElementsByTagName('body')[0].appendChild(_mqDebugDiv);
-    console.log("Started MQ debug");
-    mqEvents(handleMediaChange);
-}
+}());
