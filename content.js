@@ -7,7 +7,7 @@
     _mqDebugDiv.id = 'mqEventsCondition';
     
     var sheet = (function() {
-        var style = document.createElement("style");
+        var style = document.createElement('style');
         style.id = 'mqEventsStyles';
 
         var _mqStyles = document.getElementById('mqEventsStyles');
@@ -16,13 +16,13 @@
             return _mqStyles.sheet;
 
         // Listed for readability
-        style.appendChild(document.createTextNode("#mqEventsCondition { font-family:monospace !important;font-size:11px !important;font-weight:normal !important;color:white !important;text-transform:uppercase !important; }"));
-        style.appendChild(document.createTextNode("#mqEventsCondition { border:none !important;background-image:none !important;background-color:red !important; }"));
-        style.appendChild(document.createTextNode("#mqEventsCondition { margin-right:10px !important;padding:5px !important; }"));
-        style.appendChild(document.createTextNode("#mqEventsCondition { position:fixed !important;bottom:10px !important;left:10px !important;z-index:9999 !important; }"));
+        style.appendChild(document.createTextNode('#mqEventsCondition { font-family:monospace !important;font-size:11px !important;font-weight:normal !important;color:white !important;text-transform:uppercase !important; }'));
+        style.appendChild(document.createTextNode('#mqEventsCondition { border:none !important;background-image:none !important;background-color:red !important; }'));
+        style.appendChild(document.createTextNode('#mqEventsCondition { margin-right:10px !important;padding:5px !important; }'));
+        style.appendChild(document.createTextNode('#mqEventsCondition { position:fixed !important;bottom:10px !important;left:10px !important;z-index:9999 !important; }'));
         // Potential flash on change
-        // style.appendChild(document.createTextNode("#mqEventsCondition { transition: background-color .1s .3s linear !important; }"));
-        // style.appendChild(document.createTextNode("#mqEventsCondition.flashback { background-color:black !important; }"));
+        // style.appendChild(document.createTextNode('#mqEventsCondition { transition: background-color .1s .3s linear !important; }'));
+        // style.appendChild(document.createTextNode('#mqEventsCondition.flashback { background-color:black !important; }'));
         
         document.head.appendChild(style);
 
@@ -60,7 +60,7 @@
 
             if (href != undefined)
             {
-                xmlhttp.open("GET", href, false);
+                xmlhttp.open('GET', href, false);
                 xmlhttp.onreadystatechange = function() {
                     if (xmlhttp.readyState==4) {
 
@@ -88,8 +88,8 @@
                             mqs[txt] = txt;
                             var mql = window.matchMedia(txt);
 
-                            if (mql.media != "print") {
-                                console.log("Found: " + mql.media);
+                            if (mql.media != 'print') {
+                                console.log('Found: ' + mql.media);
                                 mql.addListener(mediaChangeHandler);
                                 mediaChangeHandler(mql);
                             }
@@ -102,7 +102,7 @@
         }
 
         if (!_mqDebugQueriesFound) {
-            console.error("No Media Queries could be found");
+            console.error('No Media Queries could be found');
             _mqDebugDiv.innerHTML = 'No Media Queries found!';
         }
     };
@@ -113,12 +113,12 @@
     var _mqStyles = document.getElementById('mqEventsStyles');
 
     if (_mqDebugMsg) {
-        console.log("Removed MQ debug");
+        console.log('Removed MQ debug');
         _mqDebugMsg.parentElement.removeChild(_mqDebugMsg);
         window.mqEvents = null; // Better way?
     } else {
         document.getElementsByTagName('body')[0].appendChild(_mqDebugDiv);
-        console.log("Started MQ debug");
+        console.log('Started MQ debug');
         mqEvents(handleMediaChange);
     }
 
