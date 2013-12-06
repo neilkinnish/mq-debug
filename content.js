@@ -3,19 +3,38 @@
 
 (function () {
 
-    var _mqDebugDiv = document.createElement('div'), _mqDebugTimer;
+    var _mqDebugDiv = document.createElement('div');
     _mqDebugDiv.id = 'mqEventsCondition';
-    _mqDebugDiv.setAttribute('style', 'font-weight:normal !important;margin-right:10px !important;transition: all 1s ease !important;border:none !important;background-image:none !important;background-color:red !important;font-size:11px !important;font-family:monospace !important;text-transform:uppercase !important;position:fixed !important;bottom:10px !important;left:10px !important;color:white !important;padding:5px !important;z-index:9999 !important;');
+    
+    var sheet = (function() {
+        var style = document.createElement("style");
+        style.id = 'mqEventsStyles';
+
+        var _mqStyles = document.getElementById('mqEventsStyles');
+
+        if (_mqStyles != null)
+            return _mqStyles.sheet;
+
+        // Listed for readability
+        style.appendChild(document.createTextNode("#mqEventsCondition { font-family:monospace !important;font-size:11px !important;font-weight:normal !important;color:white !important;text-transform:uppercase !important; }"));
+        style.appendChild(document.createTextNode("#mqEventsCondition { border:none !important;background-image:none !important;background-color:red !important; }"));
+        style.appendChild(document.createTextNode("#mqEventsCondition { margin-right:10px !important;padding:5px !important; }"));
+        style.appendChild(document.createTextNode("#mqEventsCondition { position:fixed !important;bottom:10px !important;left:10px !important;z-index:9999 !important; }"));
+        // Potential flash on change
+        // style.appendChild(document.createTextNode("#mqEventsCondition { transition: background-color .1s .3s linear !important; }"));
+        // style.appendChild(document.createTextNode("#mqEventsCondition.flashback { background-color:black !important; }"));
+        
+        document.head.appendChild(style);
+
+        return style.sheet;
+    })();
 
     var handleMediaChange = function (mql) {
-        _mqDebugDiv.setAttribute('style', 'font-weight:normal !important;margin-right:10px !important;transition: all 1s ease !important;border:none !important;background-image:none !important;background-color:red !important;font-size:11px !important;font-family:monospace !important;text-transform:uppercase !important;position:fixed !important;bottom:10px !important;left:10px !important;color:white !important;padding:5px !important;z-index:9999 !important;');
+        // _mqDebugDiv.className = "";
 
         if (mql.matches) {
-            clearTimeout(_mqDebugTimer)
             _mqDebugDiv.innerHTML = mql.media;
-            _mqDebugTimer = setTimeout(function() { 
-                _mqDebugDiv.setAttribute('style', 'font-weight:normal !important;margin-right:10px !important;transition: all 1s ease !important;border:none !important;background-image:none !important;background-color:black !important;font-size:11px !important;font-family:monospace !important;text-transform:uppercase !important;position:fixed !important;bottom:10px !important;left:10px !important;color:white !important;padding:5px !important;z-index:9999 !important;');
-            }, 400);
+            // _mqDebugDiv.className = "flashback";
         }
     };
 
@@ -89,7 +108,9 @@
     };
 
     window.mqEvents = mqEvents;
+
     var _mqDebugMsg = document.getElementById('mqEventsCondition');
+    var _mqStyles = document.getElementById('mqEventsStyles');
 
     if (_mqDebugMsg) {
         console.log("Removed MQ debug");
