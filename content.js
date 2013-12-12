@@ -30,12 +30,7 @@
     })();
 
     var handleMediaChange = function (mql) {
-        // _mqDebugDiv.className = "";
-
-        if (mql.matches) {
-            _mqDebugDiv.innerHTML = mql.media;
-            // _mqDebugDiv.className = "flashback";
-        }
+        _mqDebugDiv.innerHTML = mql.media;
     };
 
     var mqEvents = function (mediaChangeHandler) {
